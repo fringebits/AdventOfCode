@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Day01.cpp" />
+    <ClCompile Include="Day02.cpp" />
+    <ClCompile Include="Day03.cpp" />
+    <ClCompile Include="Day04.cpp" />
+    <ClCompile Include="Day05.cpp" />
+    <ClCompile Include="Day06.cpp" />
+    <ClCompile Include="Day07.cpp" />
+    <ClCompile Include="Day08.cpp" />
+    <ClCompile Include="Day09.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\Helpers\TestHelpers.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Day02.h" />
+    <ClInclude Include="Day05.h" />
+    <ClInclude Include="Day06.h" />
+    <ClInclude Include="Day07.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="..\Helpers\Converters.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\FileHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\Point.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\StringHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\Md5Helper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="InputData">
+      <UniqueIdentifier>{b1935204-beed-4d1b-92bb-dfb4da197e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{1ead99ca-6275-4300-83f0-cf96d8037b13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\InputData\Day08.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day08Test.txt">
+      <Filter>InputData</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

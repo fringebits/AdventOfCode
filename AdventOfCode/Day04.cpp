@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "HelperMd5.h"
+#include "Md5Helper.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
