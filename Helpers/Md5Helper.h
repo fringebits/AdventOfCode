@@ -330,7 +330,7 @@ public:
         int pos;
         for (pos = 0; pos < 16; pos++)
         {
-            sprintf(buffer + (pos * 2), "%02x", digestRaw[pos]);
+            sprintf_s(buffer + (pos * 2), 33-pos*2, "%02x", digestRaw[pos]);
         }
         digest = buffer;
     }

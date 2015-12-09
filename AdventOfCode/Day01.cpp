@@ -3,6 +3,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// http://adventofcode.com/day/1
+
 namespace 
 {
     int ComputeFloor(const std::string& input)

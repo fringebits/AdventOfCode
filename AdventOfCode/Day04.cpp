@@ -4,6 +4,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// http://adventofcode.com/day/4
+
 namespace
 {
     int MineAdventCoins(const std::string& code)

@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "StringHelper.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+// http://adventofcode.com/day/2
 
 namespace 
 {
@@ -29,13 +32,12 @@ namespace
         return len + bow;
     }
 
-    bool ParseLine(const std::string& line, int& length, int& width, int& height)
+    void ParseLine(const std::string& line, int& length, int& width, int& height)
     {
-        char* mark = nullptr;
-        length = strtol(line.c_str(), &mark, 10);
-        width = strtol(mark + 1, &mark, 10);
-        height = strtol(mark + 1, nullptr, 10);
-        return true;
+        auto args = Split(line, "x");
+        length = atol(args[0].c_str());
+        width = atol(args[1].c_str());
+        height = atol(args[2].c_str());
     }
 
     int ComputeWrappingPaper(const std::string& line)
@@ -71,7 +73,7 @@ namespace AdventOfCode
             Assert::AreEqual(43, ComputeWrappingPaper(1, 1, 10));
 
             int l, w, h;
-            Assert::IsTrue(ParseLine("2x3x4", l, w, h));
+            ParseLine("2x3x4", l, w, h);
             Assert::AreEqual(2, l);
             Assert::AreEqual(3, w);
             Assert::AreEqual(4, h);

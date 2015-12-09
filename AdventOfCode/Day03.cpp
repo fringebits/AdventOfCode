@@ -4,6 +4,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// http://adventofcode.com/day/3
+
 namespace
 {
     class Point
@@ -38,7 +40,7 @@ namespace
         // First, we deliver at the current location.
         history.push_back(pos);
 
-        for (int ii = start; ii < input.length(); ii += step)
+        for (size_t ii = start; ii < input.length(); ii += step)
         {
             // Move to new position.
             pos.Move(input[ii]);

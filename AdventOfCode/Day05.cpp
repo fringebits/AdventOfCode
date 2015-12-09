@@ -3,6 +3,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// http://adventofcode.com/day/5
+
 namespace
 {
     bool IsVowel(char ch)
@@ -52,17 +54,17 @@ namespace
         return vowelCount >= 3 && hasRepeatingLetter;
     }
 
-    // part 2
+    // Part 2
     bool StringIsReallyNice(const std::string& input)
     {
         // Search for Camel Count
         int camelCount = 0;
-        for (int ii = 2; ii < input.length(); ii++)
+        for (auto ii = 2u; ii < input.length(); ii++)
         {
             // Evaluate for aba or aaa
             if (input[ii - 2] == input[ii])
             {
-                // this is a 'camelCount'
+                // This is a 'camelCount'
                 camelCount++;
             }
         }
@@ -72,14 +74,13 @@ namespace
             return false;
         }
 
-        // Look for pair of two letters that appear twice in the string without overlapping
-        char pair[2];
-        for (int ii = 1; ii < input.length(); ii++)
+        // Look for pair of two letters that appear twice in the string without overlapping.
+        for (size_t ii = 1; ii < input.length(); ii++)
         {
             auto A = input[ii - 1];
             auto B = input[ii];
 
-            for (int jj = ii + 2; jj < input.length(); jj++)
+            for (size_t jj = ii + 2; jj < input.length(); jj++)
             {
                 if (A == input[jj-1] && B == input[jj])
                 {

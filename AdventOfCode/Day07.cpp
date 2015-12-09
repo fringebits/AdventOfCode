@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <map>
-
 #include "StringHelper.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+// http://adventofcode.com/day/7
 
 namespace
 {
@@ -57,7 +58,7 @@ namespace
         {
             if (IsNumber(wire))
             {
-                return atol(wire.c_str());
+                return static_cast<uint16_t>(atol(wire.c_str()));
             }
 
             auto gate = m_circuit[wire]; // get the gate that produces the output

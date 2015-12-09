@@ -4,6 +4,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// http://adventofcode.com/day/8
+
 namespace
 {
     class Solution : public TextFile
@@ -57,7 +59,7 @@ namespace
         static int DecodeString(const std::string& input)
         {
             int count = 0;
-            for (int ii = 0; ii < input.size(); ii++)
+            for (auto ii = 0u; ii < input.size(); ii++)
             {
                 auto&& ch = input[ii];
                 if (ch == '"')
@@ -94,9 +96,8 @@ namespace
             // Encode "abc" => "\"abc\"" (5 -> 9) characters
 
             int count = 2 + input.size();
-            for (int ii = 0; ii < input.size(); ii++)
+            for(auto&& ch: input)
             {
-                auto&& ch = input[ii];
                 if (ch == '"')
                 {
                     count++;
