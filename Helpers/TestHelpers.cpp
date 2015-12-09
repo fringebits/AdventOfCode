@@ -14,13 +14,13 @@ namespace AdventOfCode
             MD5 hash;
 
             hash.Compute("");
-            Assert::AreEqual(hash.digest, std::string("d41d8cd98f00b204e9800998ecf8427e"));
+            Assert::AreEqual(hash.writeToString(), std::string("d41d8cd98f00b204e9800998ecf8427e"));
 
             hash.Compute("The quick brown fox jumps over the lazy dog");
-            Assert::AreEqual(hash.digest, std::string("9e107d9d372bb6826bd81d3542a419d6"));
+            Assert::AreEqual(hash.writeToString(), std::string("9e107d9d372bb6826bd81d3542a419d6"));
 
             hash.Compute("The quick brown fox jumps over the lazy dog.");
-            Assert::AreEqual(hash.digest, std::string("e4d909c290d0fb1ca068ffaddf22cbd0"));
+            Assert::AreEqual(hash.writeToString(), std::string("e4d909c290d0fb1ca068ffaddf22cbd0"));
         }
     };
 }

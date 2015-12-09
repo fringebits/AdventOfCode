@@ -319,12 +319,10 @@ public:
 
         // Zeroize sensitive information.
         memset((POINTER)&context, 0, sizeof(context));
-
-        writeToString();
     }
 
     /// Buffer must be 32+1 (nul) = 33 chars long at least 
-    void writeToString()
+    std::string writeToString()
     {
         char buffer[33] = { 0 };
         int pos;
@@ -332,61 +330,12 @@ public:
         {
             sprintf_s(buffer + (pos * 2), 33-pos*2, "%02x", digestRaw[pos]);
         }
-        digest = buffer;
+        return std::string(buffer);
     }
 
 
 public:
     // an MD5 digest is a 16-byte number (32 hex digits)
     BYTE digestRaw[16];
-
-    // This version of the digest is actually
-    // a "printf'd" version of the digest.
-    std::string digest; //    char digestChars[33];
-
-    ///// Load a file from disk and digest it
-    //// Digests a file and returns the result.
-    //char* digestFile(char *filename)
-    //{
-    //    Init();
-
-    //    FILE *file;
-
-    //    int len;
-    //    unsigned char buffer[1024];
-
-    //    if ((file = fopen(filename, "rb")) == NULL)
-    //        printf("%s can't be opened\n", filename);
-    //    else
-    //    {
-    //        while (len = fread(buffer, 1, 1024, file))
-    //            Update(buffer, len);
-    //        Final();
-
-    //        fclose(file);
-    //    }
-
-    //    return digestChars;
-    //}
-
-    ///// Digests a byte-array already in memory
-    //char* digestMemory(BYTE *memchunk, int len)
-    //{
-    //    Init();
-    //    Update(memchunk, len);
-    //    Final();
-
-    //    return digestChars;
-    //}
-
-    //// Digests a string and prints the result.
-    //char* digestString(char *string)
-    //{
-    //    Init();
-    //    Update((unsigned char*)string, strlen(string));
-    //    Final();
-
-    //    return digestChars;
-    //}
 };
 

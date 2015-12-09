@@ -6,24 +6,33 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 // http://adventofcode.com/day/4
 
+// Todo: I really don't like the brute force approach, but it works.
+// Starting the key off for each of these with at least the number of 
+// zeros we're looking for will satisfy the problem but I haven't taken
+// the time to come up with a proof.
+
 namespace
 {
     int MineAdventCoins(const std::string& code)
     {
-        MD5 hash;
-        int key = 0;
+        int key = 0; // Can I start this early; like: 100000 (5 zeros)
+        MD5 start;
+        start.Init();
+        start.Update(reinterpret_cast<const unsigned char*>(code.c_str()), code.size());
 
         while (true)
         {
+            MD5 hash = start;
             std::ostringstream os;
-            os << code << key;
-            hash.Compute(os.str());
+            os << key;
+            auto&& value = os.str();
 
-            if ((hash.digest[0] == '0') &&
-                (hash.digest[1] == '0') &&
-                (hash.digest[2] == '0') &&
-                (hash.digest[3] == '0') &&
-                (hash.digest[4] == '0'))
+            hash.Update(reinterpret_cast<const unsigned char*>(value.c_str()), value.size());
+            hash.Final();
+
+            if ((hash.digestRaw[0] == 0) && // two digits
+                (hash.digestRaw[1] == 0) && // two more digitis
+                (hash.digestRaw[2] < 0x10)) // last digit
             {
                 break;
             }
@@ -36,21 +45,24 @@ namespace
 
     int MineAdventCoinsPart2(const std::string& code)
     {
-        MD5 hash;
-        int key = 0;
+        int key = 0; // Can I start this early; like: 1000000 (6 zeros)
+        MD5 start;
+        start.Init();
+        start.Update(reinterpret_cast<const unsigned char*>(code.c_str()), code.size());
 
         while (true)
         {
+            MD5 hash = start;
             std::ostringstream os;
-            os << code << key;
-            hash.Compute(os.str());
+            os << key;
+            auto&& value = os.str();
 
-            if ((hash.digest[0] == '0') &&
-                (hash.digest[1] == '0') &&
-                (hash.digest[2] == '0') &&
-                (hash.digest[3] == '0') &&
-                (hash.digest[4] == '0') && 
-                (hash.digest[5] == '0'))
+            hash.Update(reinterpret_cast<const unsigned char*>(value.c_str()), value.size());
+            hash.Final();
+
+            if ((hash.digestRaw[0] == 0) && // two digits
+                (hash.digestRaw[1] == 0) && // two more digitis
+                (hash.digestRaw[2] == 0)) // last digit
             {
                 break;
             }
