@@ -121,12 +121,11 @@ namespace AdventOfCode
         TEST_METHOD(Day05Part1)
         {
             int result = 0;
-            int count = sizeof(InputData) / sizeof(std::string);
-            Assert::AreEqual(1000, count);
+            Assert::AreEqual(1000u, InputData.size());
 
-            for (int ii = 0; ii < count; ii++)
+            for (auto&& line : InputData)
             {
-                if (StringIsNice(InputData[ii]))
+                if (StringIsNice(line))
                 {
                     result++;
                 }
@@ -138,12 +137,11 @@ namespace AdventOfCode
         TEST_METHOD(Day05Part2)
         {
             int result = 0;
-            int count = sizeof(InputData) / sizeof(std::string);
-            Assert::AreEqual(1000, count);
+            Assert::AreEqual(1000u, InputData.size());
 
-            for (int ii = 0; ii < count; ii++)
+            for (auto&& line : InputData)
             {
-                if (StringIsReallyNice(InputData[ii]))
+                if (StringIsReallyNice(line))
                 {
                     result++;
                 }

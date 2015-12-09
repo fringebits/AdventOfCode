@@ -56,7 +56,7 @@ namespace
         }
 
         // Part 1: Count characters of decoded string.
-        static int DecodeString(const std::string& input)
+        static int DecodeString(std::string input)
         {
             int count = 0;
             for (auto ii = 0u; ii < input.size(); ii++)
@@ -90,7 +90,7 @@ namespace
         }
 
         // Part 2: Count characters of encoded size
-        static int EncodeString(const std::string& input)
+        static int EncodeString(std::string input)
         {
             // Encode "" -> "\"\"" (2 -> 6) characters
             // Encode "abc" => "\"abc\"" (5 -> 9) characters
@@ -109,10 +109,7 @@ namespace
             }
             return count;
         }
-
-
     };
-
 }
 
 namespace AdventOfCode

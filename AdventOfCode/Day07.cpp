@@ -10,47 +10,62 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace
 {
     class Circuit;
+
     class Gate
     {
     public:
         Gate(std::string a, std::string out)
-            : A(a), Out(out), hasValue(false) { }
+            : m_inputA(a), m_out(out), m_hasValue(false) { }
+
+        void Reset()
+        {
+            m_hasValue = false;
+        }
 
         uint16_t Value(Circuit& circuit)
         {
-            if (hasValue) {
-                return value;
+            if (!m_hasValue) 
+            {
+                SetValue(Evaluate(circuit));
             }
-            value = Evaluate(circuit);
-            hasValue = true;
-            return value;
+            return m_value;
         }
-
+        
         virtual uint16_t Evaluate(Circuit& circuit) = 0;
 
-    public:
-        std::string A; // primary input
-        std::string Out; // primary output
-        bool hasValue;
-        uint16_t value;
+    protected:
+        void SetValue(uint16_t value)
+        {
+            m_value = value;
+            m_hasValue = true;
+        }
+
+    protected:
+        std::string m_inputA;   // primary input
+        std::string m_out;      // primary output
+        bool        m_hasValue; // has a cached value
+        uint16_t    m_value;    // value
     };
+
+    typedef std::shared_ptr<Gate> GatePtr;
 
     class Circuit
     {
     private:
-        std::map<std::string, Gate*> m_circuit;
+        std::map<std::string, GatePtr> m_circuit;
 
     public:
         void Reset()
         {
             for (auto&& wire : m_circuit)
             {
-                wire.second->hasValue = false;
+                wire.second->Reset();
             }
         }
 
-        void AssignGate(std::string wire, Gate* gate)
+        void AssignGate(std::string wire, GatePtr gate)
         {
+            // replace a gate.
             m_circuit[wire] = gate;
         }
 
@@ -80,15 +95,14 @@ namespace
         SetGate(std::string a, uint16_t out)
             : Gate(a, "Unknown")
         {
-            hasValue = true;
-            value = out;
+            SetValue(out);
         }
 
         uint16_t Evaluate(Circuit& c)
         {
             // a is the output
-            Assert::IsFalse(hasValue, L"Already has value.");
-            return c.Signal(this->A);
+            Assert::IsFalse(m_hasValue, L"Already has value.");
+            return c.Signal(this->m_inputA);
         }
     };
 
@@ -103,7 +117,7 @@ namespace
         uint16_t Evaluate(Circuit& c)
         {
             // a is the output
-            return ~c.Signal(A);
+            return ~c.Signal(m_inputA);
         }
     };
 
@@ -111,32 +125,29 @@ namespace
     {
     public:
         BinaryGate(std::string a, std::string b, std::string op, std::string out)
-            : Gate(a, out), B(b), Op(op)
+            : Gate(a, out), m_inputB(b), m_op(op)
         {
         }
-
-        std::string B;
-        std::string Op;
 
         uint16_t Evaluate(Circuit& c)
         {
             uint16_t result = 0;
 
-            if (Op == "AND")
+            if (m_op == "AND")
             {
-                result = c.Signal(A) & c.Signal(B);
+                result = c.Signal(m_inputA) & c.Signal(m_inputB);
             }
-            else if (Op == "OR")
+            else if (m_op == "OR")
             {
-                result = c.Signal(A) | c.Signal(B);
+                result = c.Signal(m_inputA) | c.Signal(m_inputB);
             }
-            else if (Op == "LSHIFT")
+            else if (m_op == "LSHIFT")
             {
-                result = c.Signal(A) << c.Signal(B);
+                result = c.Signal(m_inputA) << c.Signal(m_inputB);
             }
-            else if (Op == "RSHIFT")
+            else if (m_op == "RSHIFT")
             {
-                result = c.Signal(A) >> c.Signal(B);
+                result = c.Signal(m_inputA) >> c.Signal(m_inputB);
             }
             else
             {
@@ -144,6 +155,10 @@ namespace
             }
             return result;
         }
+
+    private:
+        std::string m_inputB;
+        std::string m_op;
     };
 
     void Circuit::Parse(const std::string& string)
@@ -153,23 +168,20 @@ namespace
 
         if (args.size() == 2)
         {
-            m_circuit[wire] = new SetGate(args[0], wire);
+            m_circuit[wire] = std::make_shared<SetGate>(args[0], wire);
         }
         else if (args[0] == "NOT")
         {
-            m_circuit[wire] = new NotGate(args[1], wire);
+            m_circuit[wire] = std::make_shared<NotGate>(args[1], wire);
         }
         else
         {
             // putting a value on a wire:
             // x GATE y -> w
             Assert::AreEqual<size_t>(4u, args.size(), L"GATE requires 4 arguments.");
-            m_circuit[wire] = new BinaryGate(args[0], args[2], args[1], wire);
+            m_circuit[wire] = std::make_shared<BinaryGate>(args[0], args[2], args[1], wire);
         }
     }
-
-
-
 }
 
 #include "Day07.h"
@@ -208,15 +220,6 @@ namespace AdventOfCode
             Assert::AreEqual<uint16_t>(456, circut.Signal("y"));
         }
 
-        TEST_METHOD(TestDay07a)
-        {
-            Circuit circuit;
-            //Assert::AreEqual<uint16_t>(0, circuit.Parse("1 AND 2 -> a"));
-            //Assert::AreEqual<uint16_t>(1, circuit.Parse("1 AND 3 -> a"));
-            //Assert::AreEqual<uint16_t>(65535, circuit.Parse("NOT 0 -> b"));
-            //Assert::AreEqual<uint16_t>(65535, circuit.Parse("NOT a -> c"));
-        }
-
         TEST_METHOD(Day07Part1)
         {
             Circuit circut;
@@ -241,7 +244,7 @@ namespace AdventOfCode
             auto result = circut.Signal("a");
 
             circut.Reset();
-            circut.AssignGate("b", new SetGate("b", result));
+            circut.AssignGate("b", std::make_shared<SetGate>("b", result));
             Assert::AreEqual<uint16_t>(result, circut.Signal("b"));
 
             result = circut.Signal("a");

@@ -2,7 +2,7 @@
 
 #include <string>
 
-const std::string InputData[1000] = {
+std::vector<std::string> InputData = {
 "zgsnvdmlfuplrubt",
 "vlhagaovgqjmgvwq",
 "ffumlmqwfcsyqpss",
