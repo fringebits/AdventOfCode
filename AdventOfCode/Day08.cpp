@@ -121,7 +121,7 @@ namespace AdventOfCode
     public:
         TEST_METHOD(TestDay08)
         {
-            Solution sln("../Day08Test.txt");
+            Solution sln("../InputData/Day08Test.txt");
             Assert::AreEqual<size_t>(4, sln.LineCount());
             Assert::AreEqual(0, sln.DecodeLine(0));
             Assert::AreEqual(3, sln.DecodeLine(1));
