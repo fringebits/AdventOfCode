@@ -14,6 +14,7 @@
     <ClCompile Include="..\Helpers\TestHelpers.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Day10.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02.h" />
