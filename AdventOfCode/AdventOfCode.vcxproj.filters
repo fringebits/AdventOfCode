@@ -15,6 +15,7 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Day10.cpp" />
+    <ClCompile Include="Day11.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02.h" />
