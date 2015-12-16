@@ -129,7 +129,7 @@ namespace AdventOfCode
             {
                 result += SumNumbers(line);
             }
-            Assert::AreEqual(0, result);
+            Assert::AreEqual(111754, result);
         }
 
         TEST_METHOD(Day12Part2)

@@ -15,5 +15,7 @@
 #include <memory>
 #include <map>
 #include <algorithm>
+#include <functional>
+#include <numeric>
 
-#include "Converters.h"
+#include "Helpers.h"

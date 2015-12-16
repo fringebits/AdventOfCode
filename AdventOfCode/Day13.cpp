@@ -89,7 +89,7 @@ namespace AdventOfCode
             SeatingChart chart;
             chart.Parse("../InputData/Day13.txt");
 
-            Assert::AreEqual(773, chart.EvaluateBestSeats());
+            Assert::AreEqual(733, chart.EvaluateBestSeats());
         }
 
         TEST_METHOD(Day13Part2)

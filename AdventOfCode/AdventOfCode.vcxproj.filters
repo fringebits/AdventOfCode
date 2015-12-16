@@ -19,6 +19,8 @@
     <ClCompile Include="Day13.cpp" />
     <ClCompile Include="Day14.cpp" />
     <ClCompile Include="Day12.cpp" />
+    <ClCompile Include="Day15.cpp" />
+    <ClCompile Include="Day16.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02.h" />
@@ -39,6 +41,12 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="..\Helpers\Md5Helper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\Nullable.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers\Helpers.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -67,6 +75,12 @@
       <Filter>InputData</Filter>
     </Text>
     <Text Include="..\InputData\Day14.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day16.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day15.txt">
       <Filter>InputData</Filter>
     </Text>
   </ItemGroup>
