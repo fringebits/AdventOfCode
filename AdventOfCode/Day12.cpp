@@ -27,7 +27,7 @@ namespace
         // [ ]
         Assert::AreEqual('[', input[0]);
         Assert::AreEqual(']', input.back());
-
+        
         auto tokens = Split(input.substr(1, input.size() - 2), ",");
         std::vector<std::string> kvp;
 

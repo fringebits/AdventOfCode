@@ -56,28 +56,23 @@ namespace
             return result;
         }
 
-        std::string LeaderAtTime(int time)
+        std::vector<std::string> LeadersAtTime(int time)
         {
-            int count = 0; // number of ties
             int result = 0;
-            std::string leader;
+            std::vector<std::string> leader;
             for (auto&& p : m_map)
             {
                 auto r = p.second->DistanceAtTime(time);
                 if (r > result)
                 {
                     result = r;
-                    leader = p.first;
+                    leader.clear();
+                    leader.push_back(p.first);
                 }
                 else if (r == result)
                 {
-                    count++;
+                    leader.push_back(p.first);
                 }
-            }
-
-            if (count == m_map.size() - 1)
-            {
-                leader = "";
             }
 
             return leader;
@@ -85,19 +80,13 @@ namespace
 
         int TopScoreAtTime(int time)
         {
-            int tieCount = 0;
-
             m_score.clear();
             for (int ii = 1; ii < time; ii++)
             {
-                auto r = LeaderAtTime(ii);
-                if (!r.empty())
+                auto leaders = LeadersAtTime(ii);
+                for(auto&& r: leaders)
                 {
-                    m_score[r] = m_score[r] + 1;
-                }
-                else
-                {
-                    tieCount++;
+                    m_score[r] += 1;
                 }
             }
 
@@ -106,7 +95,6 @@ namespace
             {
                 result = std::max(result, p.second);
             }
-            result += tieCount;
 
             return result;
         }
@@ -149,7 +137,7 @@ namespace AdventOfCode
             Fleet f;
             f.Parse("../InputData/Day14.txt");
 
-            Assert::AreEqual(0, f.TopScoreAtTime(2503));
+            Assert::AreEqual(1059, f.TopScoreAtTime(2503));
         }
     };
 }
