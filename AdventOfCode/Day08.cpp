@@ -21,7 +21,7 @@ namespace
             int memory = 0;
             int count = 0;
 
-            for (auto&& line : m_lines)
+            for (auto&& line : *this)
             {
                 memory += line.size();
                 count += DecodeString(line);
@@ -35,7 +35,7 @@ namespace
             int memory = 0;
             int count = 0;
 
-            for (auto&& line : m_lines)
+            for (auto&& line : *this)
             {
                 memory += line.size();
                 count += EncodeString(line);
@@ -47,12 +47,12 @@ namespace
 
         int DecodeLine(size_t lineIndex)
         {
-            return lineIndex < m_lines.size() ? DecodeString(m_lines[lineIndex]) : -1;
+            return lineIndex < size() ? DecodeString(operator[](lineIndex)) : -1;
         }
 
         int EncodeLine(size_t lineIndex)
         {
-            return lineIndex < m_lines.size() ? EncodeString(m_lines[lineIndex]) : -1;
+            return lineIndex < size() ? EncodeString(operator[](lineIndex)) : -1;
         }
 
         // Part 1: Count characters of decoded string.

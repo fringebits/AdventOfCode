@@ -5,7 +5,7 @@
 #include <fstream>
 
 // Helper to read text file into a vector of lines.
-class TextFile
+class TextFile : public std::vector<std::string>
 {
 public:
     TextFile(const char* filename)
@@ -15,7 +15,7 @@ public:
 
         for (std::string line; std::getline(ofs, line);)
         {
-            m_lines.push_back(line);
+            push_back(line);
         }
 
         ofs.close();
@@ -23,10 +23,7 @@ public:
 
     size_t LineCount() const
     {
-        return m_lines.size();
+        return size();
     }
-
-protected:
-    std::vector<std::string> m_lines;
 };
 

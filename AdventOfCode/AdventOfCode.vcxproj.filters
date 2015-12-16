@@ -16,6 +16,9 @@
     </ClCompile>
     <ClCompile Include="Day10.cpp" />
     <ClCompile Include="Day11.cpp" />
+    <ClCompile Include="Day13.cpp" />
+    <ClCompile Include="Day14.cpp" />
+    <ClCompile Include="Day12.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02.h" />
@@ -52,6 +55,18 @@
       <Filter>InputData</Filter>
     </Text>
     <Text Include="..\InputData\Day08Test.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day12.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day13Test.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day13.txt">
+      <Filter>InputData</Filter>
+    </Text>
+    <Text Include="..\InputData\Day14.txt">
       <Filter>InputData</Filter>
     </Text>
   </ItemGroup>

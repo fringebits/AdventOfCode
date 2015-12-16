@@ -10,9 +10,9 @@ inline bool IsNumber(const std::string& input)
     return (pos == 0);
 }
 
-inline std::vector<std::string> ReadFromFile(const char* filename)
-{
-}
+//inline std::vector<std::string> ReadFromFile(const char* filename)
+//{
+//}
 
 inline std::vector<std::string> Split(std::string _string, const char* key)
 {
