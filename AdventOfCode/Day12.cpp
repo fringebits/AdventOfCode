@@ -22,89 +22,59 @@ namespace
         return sum;
     }
 
-    int ParseArray(std::string input)
+    size_t FindPreviousBrace(const std::string& input, size_t pos)
     {
-        // [ ]
-        Assert::AreEqual('[', input[0]);
-        Assert::AreEqual(']', input.back());
-        
-        auto tokens = Split(input.substr(1, input.size() - 2), ",");
-        std::vector<std::string> kvp;
-
-        for (auto&& tok : tokens)
-        {
-            //if (tok[0] == '[')
-            //{
-            //    ParseArray(tok);
-            //}
-            //else if (tok[0] == '{')
-            //{
-            //    ParseObject(tok);
-            //}
-            //else
-            //{
-            //    kvp.push_back(tok);
-            //}
-        }
-    }
-
-    int ParseObject(std::string input)
-    {
-        // { }
-        Assert::AreEqual('{', input[0]);
-        Assert::AreEqual('}', input.back());
-
-        auto tokens = Split(input.substr(1, input.size()-2), ",");
-        std::vector<std::string> kvp;
-
-        for (auto&& tok : tokens)
-        {
-            if (tok[0] == '[')
-            {
-                ParseArray(tok);
-            }
-            else if (tok[0] == '{')
-            {
-                ParseObject(tok);
-            }
-            else
-            {
-                kvp.push_back(tok);
-            }
-        }
-    }
-
-    int ParseString(std::string input)
-    {
-        // string should start with '[' or '{'
-
-        if (input[0] == '[')
-        {
-            ParseArray(input);
-        }
-        else if (input[0] = '{')
-        {
-            ParseObject(input);
-        }
-
         int depth = 0;
-        int result = 0;
-        size_t pos = 0;
+        while (pos != 0)
+        {
+            if (input[pos] == '}')
+            {
+                depth++;
+            }
+            if (input[pos] == '{')
+            {
+                depth--;
+                if (depth == -1)
+                    return pos;
+            }
+            pos--;
+        }
+        return pos;
+    }
 
+    size_t FindNextBrace(const std::string& input, size_t pos)
+    {
+        int depth = 0;
         while (pos < input.size())
         {
-            if (input[pos] == '[')
+            if (input[pos] == '{')
             {
+                depth++;
             }
-            else if (input[pos] == ']')
+            if (input[pos] == '}')
             {
+                depth--;
+                if (depth == -1)
+                    return pos;
             }
+            pos++;
         }
-
-        return result;
+        return pos;
     }
 
+    int SumNumbersWithoutRed(std::string input)
+    {
+        size_t pos = 0;
+        while (std::string::npos != (pos = input.find(":\"red\"")))
+        {
+            // we've found a 'red' property.  Find the parent 
+            auto tip = FindPreviousBrace(input, pos);
+            auto tail = FindNextBrace(input, pos);
+            input = input.substr(0, tip) + std::string("X") + input.substr(tail+1);
+        }
 
+        return SumNumbers(input);
+    }
 }
 
 namespace AdventOfCode
@@ -114,28 +84,28 @@ namespace AdventOfCode
     public:
         TEST_METHOD(TestDay12)
         {
-            Assert::AreEqual(6, SumNumbers("[1, 2, 3]")); // and {"a":2, "b" : 4}
-            Assert::AreEqual(0, SumNumbers("[1, 2, -3]")); // and {"a":2, "b" : 4}
-            Assert::AreEqual(10, SumNumbers("[1, 2, -3, 10]")); // and {"a":2, "b" : 4}
+            Assert::AreEqual(6, SumNumbers("[1, 2, 3]"));
+            Assert::AreEqual(0, SumNumbers("[1, 2, -3]"));
+            Assert::AreEqual(10, SumNumbers("[1, 2, -3, 10]"));
+
+            TextFile file("../InputData/Day12.txt");
+            Assert::AreEqual(28, SumNumbers(file.at(1)));
+            Assert::AreEqual(5, SumNumbersWithoutRed(file.at(1)));
+            Assert::AreEqual(5, SumNumbersWithoutRed(file.at(2)));
         }
 
         TEST_METHOD(Day12Part1)
         {
-
             TextFile file("../InputData/Day12.txt");
-            Assert::AreEqual<size_t>(1, file.LineCount());
-            int result = 0;
-            for (auto&& line : file)
-            {
-                result += SumNumbers(line);
-            }
+            auto result = SumNumbers(file.at(0));
             Assert::AreEqual(111754, result);
         }
 
         TEST_METHOD(Day12Part2)
         {
-            int result = -1;
-            Assert::AreEqual(0, result);
+            TextFile file("../InputData/Day12.txt");
+            auto result = SumNumbersWithoutRed(file.at(0));
+            Assert::AreEqual(65402, result);
         }
     };
 }

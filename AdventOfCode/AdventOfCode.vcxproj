@@ -120,6 +120,7 @@
     <ClInclude Include="..\Helpers\Md5Helper.h" />
     <ClInclude Include="..\Helpers\Nullable.h" />
     <ClInclude Include="..\Helpers\Point.h" />
+    <ClInclude Include="..\Helpers\StateMachine.h" />
     <ClInclude Include="..\Helpers\StringHelper.h" />
     <ClInclude Include="Day02.h" />
     <ClInclude Include="Day05.h" />

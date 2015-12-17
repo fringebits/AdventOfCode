@@ -173,7 +173,7 @@ namespace AdventOfCode
                 }
             }
 
-            Assert::AreEqual(0, result);
+            Assert::AreEqual(405, result);
         }
     };
 }
