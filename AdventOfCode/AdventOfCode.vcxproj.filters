@@ -11,9 +11,6 @@
     <ClCompile Include="Day08.cpp" />
     <ClCompile Include="Day09.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="..\Helpers\TestHelpers.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="Day10.cpp" />
     <ClCompile Include="Day11.cpp" />
     <ClCompile Include="Day13.cpp" />
@@ -21,6 +18,7 @@
     <ClCompile Include="Day12.cpp" />
     <ClCompile Include="Day15.cpp" />
     <ClCompile Include="Day16.cpp" />
+    <ClCompile Include="Day17.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02.h" />
@@ -49,6 +47,7 @@
     <ClInclude Include="..\Helpers\Helpers.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Helpers\StateMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="InputData">
