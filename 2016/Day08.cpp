@@ -119,7 +119,7 @@ namespace AdventOfCode
     public:
         TEST_METHOD(TestDay08)
         {
-            Solution sln("../InputData/Day08Test.txt");
+            Solution sln("InputData/Day08Test.txt");
             Assert::AreEqual<size_t>(4, sln.LineCount());
             Assert::AreEqual(0, sln.DecodeLine(0));
             Assert::AreEqual(3, sln.DecodeLine(1));
@@ -138,7 +138,7 @@ namespace AdventOfCode
 
         TEST_METHOD(Day08Part1)
         {
-            Solution sln("../InputData/Day08.txt");
+            Solution sln("InputData/Day08.txt");
             Assert::AreEqual<size_t>(300, sln.LineCount());
           
             Assert::AreEqual(1371, sln.PartOne());
@@ -146,7 +146,7 @@ namespace AdventOfCode
 
         TEST_METHOD(Day08Part2)
         {
-            Solution sln("../InputData/Day08.txt");
+            Solution sln("InputData/Day08.txt");
             Assert::AreEqual<size_t>(300, sln.LineCount());
 
             Assert::AreEqual(2117, sln.PartTwo());

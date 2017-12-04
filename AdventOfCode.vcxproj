@@ -91,52 +91,55 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Day01.cpp" />
-    <ClCompile Include="Day02.cpp" />
-    <ClCompile Include="Day03.cpp" />
-    <ClCompile Include="Day04.cpp" />
-    <ClCompile Include="Day05.cpp" />
-    <ClCompile Include="Day06.cpp" />
-    <ClCompile Include="Day07.cpp" />
-    <ClCompile Include="Day08.cpp" />
-    <ClCompile Include="Day09.cpp" />
-    <ClCompile Include="Day10.cpp" />
-    <ClCompile Include="Day11.cpp" />
-    <ClCompile Include="Day12.cpp" />
-    <ClCompile Include="Day13.cpp" />
-    <ClCompile Include="Day14.cpp" />
-    <ClCompile Include="Day15.cpp" />
-    <ClCompile Include="Day16.cpp" />
-    <ClCompile Include="Day17.cpp" />
+    <ClCompile Include="2016\Day01.cpp" />
+    <ClCompile Include="2016\Day02.cpp" />
+    <ClCompile Include="2016\Day03.cpp" />
+    <ClCompile Include="2016\Day04.cpp" />
+    <ClCompile Include="2016\Day05.cpp" />
+    <ClCompile Include="2016\Day06.cpp" />
+    <ClCompile Include="2016\Day07.cpp" />
+    <ClCompile Include="2016\Day08.cpp" />
+    <ClCompile Include="2016\Day09.cpp" />
+    <ClCompile Include="2016\Day10.cpp" />
+    <ClCompile Include="2016\Day11.cpp" />
+    <ClCompile Include="2016\Day12.cpp" />
+    <ClCompile Include="2016\Day13.cpp" />
+    <ClCompile Include="2016\Day14.cpp" />
+    <ClCompile Include="2016\Day15.cpp" />
+    <ClCompile Include="2016\Day16.cpp" />
+    <ClCompile Include="2016\Day17.cpp" />
+    <ClCompile Include="2017\Day2017_01.cpp" />
+    <ClCompile Include="2017\Day2017_02.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Helpers\Converters.h" />
-    <ClInclude Include="..\Helpers\FileHelper.h" />
-    <ClInclude Include="..\Helpers\Helpers.h" />
-    <ClInclude Include="..\Helpers\Md5Helper.h" />
-    <ClInclude Include="..\Helpers\Nullable.h" />
-    <ClInclude Include="..\Helpers\Point.h" />
-    <ClInclude Include="..\Helpers\StateMachine.h" />
-    <ClInclude Include="..\Helpers\StringHelper.h" />
-    <ClInclude Include="Day02.h" />
-    <ClInclude Include="Day05.h" />
-    <ClInclude Include="Day06.h" />
-    <ClInclude Include="Day07.h" />
+    <ClInclude Include="Helpers\Converters.h" />
+    <ClInclude Include="Helpers\FileHelper.h" />
+    <ClInclude Include="Helpers\Helpers.h" />
+    <ClInclude Include="Helpers\Md5Helper.h" />
+    <ClInclude Include="Helpers\Nullable.h" />
+    <ClInclude Include="Helpers\Point.h" />
+    <ClInclude Include="Helpers\StateMachine.h" />
+    <ClInclude Include="Helpers\StringHelper.h" />
+    <ClInclude Include="2016\Day02.h" />
+    <ClInclude Include="2016\Day05.h" />
+    <ClInclude Include="2016\Day06.h" />
+    <ClInclude Include="2016\Day07.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\InputData\Day08.txt" />
-    <Text Include="..\InputData\Day08Test.txt" />
-    <Text Include="..\InputData\Day12.txt" />
-    <Text Include="..\InputData\Day13.txt" />
-    <Text Include="..\InputData\Day13Test.txt" />
-    <Text Include="..\InputData\Day14.txt" />
-    <Text Include="..\InputData\Day15.txt" />
-    <Text Include="..\InputData\Day16.txt" />
+    <Text Include="2016\InputData\Day08.txt" />
+    <Text Include="2016\InputData\Day08Test.txt" />
+    <Text Include="2016\InputData\Day12.txt" />
+    <Text Include="2016\InputData\Day13.txt" />
+    <Text Include="2016\InputData\Day13Test.txt" />
+    <Text Include="2016\InputData\Day14.txt" />
+    <Text Include="2016\InputData\Day15.txt" />
+    <Text Include="2016\InputData\Day16.txt" />
+    <Text Include="2017\InputData\Day2017_02.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

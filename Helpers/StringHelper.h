@@ -14,6 +14,22 @@ inline bool IsNumber(const std::string& input)
 //{
 //}
 
+inline std::vector<int> SplitInt(const std::string& input)
+{
+    std::vector<int> result;
+
+    char* next = nullptr;
+
+    result.push_back(strtol(input.c_str(), &next, 10));
+
+    while (next != nullptr)
+    {
+        result.push_back(strtol(input.c_str(), &next, 10));
+    }
+
+    return result;
+}
+
 inline std::vector<std::string> Split(std::string _string, const char* key)
 {
     std::vector<std::string> list;

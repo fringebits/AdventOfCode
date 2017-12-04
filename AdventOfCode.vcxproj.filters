@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="2016\Day01.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day02.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day03.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day04.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day05.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day06.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day07.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day08.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day09.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day10.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day11.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day12.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day13.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day14.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day15.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day16.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2016\Day17.cpp">
+      <Filter>2016</Filter>
+    </ClCompile>
+    <ClCompile Include="2017\Day2017_02.cpp">
+      <Filter>2017</Filter>
+    </ClCompile>
+    <ClCompile Include="2017\Day2017_01.cpp">
+      <Filter>2017</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="2016\Day02.h">
+      <Filter>2016</Filter>
+    </ClInclude>
+    <ClInclude Include="2016\Day05.h">
+      <Filter>2016</Filter>
+    </ClInclude>
+    <ClInclude Include="2016\Day06.h">
+      <Filter>2016</Filter>
+    </ClInclude>
+    <ClInclude Include="2016\Day07.h">
+      <Filter>2016</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Converters.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\FileHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Helpers.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Md5Helper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Nullable.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Point.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\StateMachine.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\StringHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{1ead99ca-6275-4300-83f0-cf96d8037b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2016">
+      <UniqueIdentifier>{1820215c-12a7-4cdb-98f9-84b0f6a7c73a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2017">
+      <UniqueIdentifier>{80eafb1f-e252-4aac-9f6d-cc97feafcb3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2016\InputData">
+      <UniqueIdentifier>{b68162a7-727f-47d3-b931-a0f896f4d393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2017\InputData">
+      <UniqueIdentifier>{01206222-caee-4895-9eee-f256bb63bd8c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="2016\InputData\Day13.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day13Test.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day14.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day15.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day16.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day08Test.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day08.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2016\InputData\Day12.txt">
+      <Filter>2016\InputData</Filter>
+    </Text>
+    <Text Include="2017\InputData\Day2017_02.txt">
+      <Filter>2017\InputData</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
