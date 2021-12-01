@@ -3,6 +3,10 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utils
 
+#
+# https://adventofcode.com/2021/day/1
+#
+
 sample_input = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
 
 @utils.timer
@@ -23,19 +27,23 @@ def run():
 
 def run_part1(input):
     "part1: count the number of times a depth measurement increases from the previous measurement."
-    count = 0
-    for ii in range(1, len(input)):
-        if input[ii] > input[ii-1]:
-            count += 1
+    count = count_increases(input, 1)
     print("part1: increases = {0}".format(count))
 
 def run_part2(input):
-    "part2"
-    count = 0
-    for ii in range(3, len(input)):
-        if input[ii] > input[ii-3]:
-            count += 1
+    "part2: three-measurement sliding window"
+    count = count_increases(input, 3)
     print("part2: increases = {0}".format(count))
+
+def count_increases(input, width):
+    "Count the number of increases in the input, with a sliding window of 'width' elements."
+    # note that in the 'sliding window', there are common elements and we don't need to consider
+    # those because their net difference is zero.
+    count = 0
+    for ii in range(width, len(input)):
+        if input[ii] > input[ii-width]:
+            count += 1
+    return count
 
 if __name__ == "__main__":
     run()
