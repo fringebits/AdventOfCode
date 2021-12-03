@@ -17,9 +17,9 @@ def run():
     run_part2(input)
 
 def run_part1(input):
-    gamma = int(compute_gamma(input), 2)
-    epsilon = int(compute_epsilon(input), 2)
-    power = gamma * epsilon
+    gamma = compute_gamma(input)
+    epsilon = compute_epsilon(input)
+    power = int(gamma,2) * int(epsilon,2)
     print("part1: gamma={0}, epsilon={1}, power={2}".format(gamma, epsilon, power))
     
 def run_part2(input):
@@ -28,12 +28,12 @@ def run_part2(input):
     life_support = oxygen_rating * scrub_rating
     print("part2: oxygen_rating = {0}, scrub_rating = {1}, life_support = {2}".format(oxygen_rating, scrub_rating, life_support))
 
-
 def compute_gamma(input):
-    # count the number of ones in each position
+    # Each bit in the gamma rate can be determined by finding the most common bit in the corresponding position of all numbers in the input.
+    # count the '1's in each position.
     count = len(input)
     width = len(input[0])
-    one_count = [0] * width
+    one_count = [0] * width  # array to hold count of 'ones'
     for line in input:
         for ii in range(width):
             if line[ii] == '1':
@@ -41,72 +41,34 @@ def compute_gamma(input):
     
     result = ""
     for ii in range(width):
+        # now figure out which is most common (1 or 0)
         if one_count[ii] >= (count - one_count[ii]):
             result = result + '1'
         else:
             result = result + '0'
-
-    #print("gamma   = {0} = {1}".format(result, int(result, 2)))
     return result
 
 def compute_epsilon(input):
-    # count the number of ones in each position
-    count = len(input)
-    width = len(input[0])
-    one_count = [0] * width
-    for line in input:
-        for ii in range(width):
-            if line[ii] == '1':
-                one_count[ii] += 1
-    
-    result = ""
-    for ii in range(width):
-        if one_count[ii] >= (count - one_count[ii]):
-            result = result + '0'
-        else:
-            result = result + '1'
-
-    #print("epsilon = {0} = {1}".format(result, int(result, 2)))
-    return result
-
-def compute_common_mask(input, bit):
-    # count the number of ones in each position
-    count = len(input)
-    width = len(input[0])
-    one_count = [0] * width
-    for line in input:
-        for ii in range(width):
-            if line[ii] == '1':
-                one_count[ii] += 1
-    
-    result = ""
-    for ii in range(width):
-        if one_count[ii] >= (count - one_count[ii]):
-            result = result + ('0' if bit else '1')
-        else:
-            result = result + ('1' if bit else '0')
-
-    #print("epsilon = {0} = {1}".format(result, int(result, 2)))
-    return result
+    # The epsilon rate is calculated similar to gamma, rather than use the most common bit, the least common bit from each position is used.
+    # Since each bit is independent, we can just 'invert the gamma mask'
+    gamma = compute_gamma(input)
+    return ''.join(list(map(lambda x: ('0' if x == '1' else '1'), gamma)))
 
 def compute_oxygen_rating(input):
-    bit = 0
-    while len(input) > 1:
-        gamma = compute_gamma(input)
-        input = [line for line in input if line[bit] == gamma[bit]]
-        bit += 1
-    result = int(input[0], 2)
-    #print("oxygen_rating = {0} = {1}".format(input[0], result))
-    return result
+    # oxygen rating is computed by filtering based on 'compute_gamma'
+    return compute_rating(input, compute_gamma)
 
 def compute_scrub_rating(input):
+    # oxygen rating is computed by filtering based on 'compute_epsilon'
+    return compute_rating(input, compute_epsilon)
+
+def compute_rating(input, func):
     bit = 0
     while len(input) > 1:
-        gamma = compute_epsilon(input)
+        gamma = func(input)
         input = [line for line in input if line[bit] == gamma[bit]]
         bit += 1
     result = int(input[0], 2)
-    #print("scrub_rating = {0} = {1}".format(input[0], result))
     return result
 
 def load_input(filename):
@@ -114,7 +76,6 @@ def load_input(filename):
     input = [line.strip() for line in f]
     f.close()
     return input
-
 
 if __name__ == "__main__":
     run()
