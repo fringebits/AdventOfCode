@@ -8,8 +8,6 @@ import re
 def run():
     print("\n***** Day 4 *****")
 
-    #Card.RunTests()
-
     #input, cards = load_input('sample_input.txt')
     input, cards = load_input('input.txt')
 
@@ -25,8 +23,6 @@ def run():
 def run_part1(input, cards):
     "Part 1: Find first winning bingo card"
     for num in input:
-        #print("The next number is: ", num)
-
         # mark all cards with specified input
         for card in cards:
             if card.MarkCard(num):
@@ -34,26 +30,27 @@ def run_part1(input, cards):
                 score = card.ComputeScore()
                 print("Part1: lastNum = {0}, score = {1}, totalScore = {2}".format(num, score, num * score))
                 return # break/return on the FIRST winning bingo card we find
-        
-    print("Failed to find a winning card")
+    assert False, "Failed to find a winning card"
     
 def run_part2(input, cards):
     "Part 2: Find last winning bingo card"
     for num in input:
-        #print("The next number is: ", num)
         winner = False
+
         # mark all cards with specified input
         for card in cards:
             if card.MarkCard(num): 
                 winner = True
-        # remove all winning cards
+        
+        #if there was a winner
         if winner:
-            if len(cards) == 1:
+            if len(cards) == 1: # it was the last and only winner
                 score = card.ComputeScore()
                 print("Part2: lastNum = {0}, score = {1}, totalScore = {2}".format(num, score, num * score))
                 return
-            # otherwise, filter out all the careds where we have a winner
+            # otherwise, filter out all the cards where we have a winner
             cards = [c for c in cards if c.IsBingo() is False]
+    assert False, "Failed to find the last winning card"
 
 def load_input(filename):
     nums = []
@@ -102,14 +99,12 @@ class Card:
 
     def IsBingo(self):
         # Data is stored by row; we look at 0..4, 5..9, etc.
-        # check horizontal data
         for ii in range(0, 5):
-            row = self.marks[ii*5:ii*5+5]
-            col = self.marks[ii:25:5]
+            row = self.marks[ii*5 : ii*5+5]
+            col = self.marks[ ii : 25 : 5]
             if sum(row)==0 or sum(col)==0:
                 #self.PrintCard()
                 return True     
-
         return False
 
     def ComputeScore(self):
@@ -124,7 +119,6 @@ class Card:
         for ii in range(0, 5):
             m = ["{0:1}".format('*' if v==0 else '') for v in self.marks[ii*5:ii*5+5]]
             row = self.card[ii*5:ii*5+5]
-            #print(" ".join(["{:-5}"]*len(row)).format(*row))
             row = [val for pair in zip(row,m) for val in pair]            
             print("".join(["{:-5}{} "]*5).format(*row))
         print("---")
