@@ -14,3 +14,6 @@ class Vec2:
         x = self.X + other.X
         y = self.Y + other.Y
         return Vec2(x, y)
+
+    def __eq__(self, other):
+        return other.X == self.X and other.Y == self.Y
