@@ -10,14 +10,14 @@ verbose = False
 def run():
     print("\n***** Day 6 *****")
 
-    input = load_input('sample_input.txt')
-    #input = load_input('input.txt')
+    #input = load_input('sample_input.txt')
+    input = load_input('input.txt')
 
     # part 1:
     run_part1(input)
 
     # part 2:
-    #run_part2(input)
+    run_part2(input)
 
 def run_part1(input):
     days = 80
@@ -31,14 +31,17 @@ def run_part2(input):
 
 def run_sim(input: str, days: int):
     flock = Flock()
-    flock.fishes = [Fish(int(v)) for v in input.split(',')]
+    for fish in input.split(','):
+        flock.pens[int(fish)] += 1
+    
+    if verbose:
+        flock.PrintFlock()
 
-    #flock.PrintFlock()
     for d in range(days):
         flock.Tick()
         if verbose:
             flock.PrintFlock()
-    return len(flock.fishes)
+    return flock.Count()
 
 
 def load_input(filename):
@@ -46,35 +49,37 @@ def load_input(filename):
     input = [line.strip() for line in f]
     f.close()
     return input[0]
-
-class Fish:
-    def __init__(self, cooldown: int):
-        self.origin = cooldown
-        self.cooldown = cooldown
-
-    def __str__(self):
-        return "{0}".format(self.cooldown)
-
 class Flock:
+    MaxAge = 8
+    Respawn = 6
+
     def __init__(self):
-        self.fishes = []
+        self.pens = [0] * (self.MaxAge+1)
         self.elapsed = 0
 
     def Tick(self):
         self.elapsed += 1
         newfish = []
-        for fish in self.fishes:
-            if fish.cooldown == 0:
-                newfish.append(Fish(8))
-                fish.cooldown = 6
+        for slot in range(self.MaxAge+1):
+            if slot == 0:
+                # all the fishes in slot 0 get moved to slot 6, and we 
+                # get that many new fishes
+                newfish = self.pens[0]
+                self.pens[0] = 0
             else:
-                fish.cooldown = fish.cooldown - 1
+                self.pens[slot-1] = self.pens[slot]
+                self.pens[slot] = 0
         
-        self.fishes += newfish
+        if newfish > 0:
+            self.pens[self.MaxAge] = newfish
+            self.pens[self.Respawn] += newfish
+
+    def Count(self):
+        return sum(self.pens)
 
     def PrintFlock(self):
-        fish = ["{0}".format(v) for v in self.fishes]
-        print("day {0:3}: {2:3} : {1}".format(self.elapsed, ",".join(fish), len(fish)))
+        fish = ["{0:3}".format(v) for v in self.pens]
+        print("day {0:3}: {2:3} : {1}".format(self.elapsed, " ".join(fish), self.Count()))
 
 if __name__ == "__main__":
     run()
