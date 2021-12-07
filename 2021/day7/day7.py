@@ -31,8 +31,8 @@ def run_part2(crabs):
 def find_min_cost(crabs, move_cost_func):
     # consider all alignment positions, compute cost for each, return minimum
     cost = cost_to_align(crabs, min(crabs), move_cost_func)
-    for ii in range(min(crabs), max(crabs)): # range of positions to consider...
-        val = cost_to_align(crabs, ii, move_cost_func)
+    for ii in range(min(crabs)+1, max(crabs)+1): # range of positions to consider.  +1 on the lower bound because we already computed it as the initial cost.  +1 on as upper range is [min, max), and we want to evaluate max(crabs)
+        val = cost_to_align(crabs, ii, move_cost_func) 
         if val > cost:
             # once the new cost starts going back up, we're done (will only be one local minima)
             break
