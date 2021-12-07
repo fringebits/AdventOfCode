@@ -6,7 +6,7 @@ import re
 
 @utils.timer
 def run():
-    print("\n***** Day 5 *****")
+    print("\n***** Day 4 *****")
 
     input, cards = load_input('sample_input.txt')
     input, cards = load_input('input.txt')
