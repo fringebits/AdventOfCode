@@ -48,14 +48,14 @@ class Graph:
 
     def CountPaths(self, head, tail):
         #visited = defaultdict(int)
-        visited = set()
+        visited = []
         count = self.Traverse(head, tail, visited)
         return count
 
     def Traverse(self, node_a, node_b, visited):
-        print("Traverse {0}, visited=[{1}]".format(node_a, visited))
+        print("Traverse {0}, visited={1}".format(node_a, visited))
         count = 0 # number of paths (we'll return this)
-        visited.add(node_a)
+        visited.append(node_a)
         if node_a == node_b:
             # we reached our destination
             count = 1
@@ -65,7 +65,7 @@ class Graph:
                 if self.CanVisit(n, visited):
                     #print("\tTraversing {0}".format(n))
                     count += self.Traverse(n, node_b, visited)
-        visited.discard(node_a)
+        visited.remove(node_a)
         return count
 
     def CanVisit(self, node, visited):
