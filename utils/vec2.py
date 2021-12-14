@@ -1,8 +1,4 @@
 class Vec2:
-    def __init__(self) -> None:
-        self.X = 0
-        self.Y = 0
-
     def __init__(self, x, y) -> None:
         self.X = x
         self.Y = y
@@ -17,3 +13,9 @@ class Vec2:
 
     def __eq__(self, other):
         return other.X == self.X and other.Y == self.Y
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash(f"{self.X},{self.Y}")
