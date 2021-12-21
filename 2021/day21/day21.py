@@ -8,25 +8,19 @@ import utils
 def run():
     print("\n***** Day 21 *****")
 
-    #lines = load_input('sample_input.txt')
-    #lines = load_input('input.txt')
-    #puzzle = Puzzle(lines)
+    # test input
+    #players = [Player(4), Player(8)]
 
-    puzzle = Board()
-    puzzle.AddPlayer(Player(8))
-    puzzle.AddPlayer(Player(2))
+    # official input
+    players = [Player(8), Player(2)]
 
     # part 1:
-    puzzle.PlayGame()
-    print(f"Part 1: {puzzle.part1}")
+    game = Game(1000, players, Die(100))
+    game.PlayGame()
+    print(f"Part 1: {game.part1}")
 
     # part 2:
-
-def load_input(filename):
-    f = open(os.path.join(os.path.dirname(__file__), filename), 'r')            
-    input = [line.strip() for line in f]
-    f.close()
-    return input
+    print(f"Part 2: INCOMPLETE")
 
 class Player:
     def __init__(self, pos):
@@ -41,30 +35,29 @@ class Player:
         print(f"Player rolls {count} and to {self.pos+1}, score={self.score}")
 
 class Die:
-    def __init__(self):
+    def __init__(self, faces = 100):
+        self.faces = faces
         self.value = 0
         self.rollCount = 0
 
     def RollOnce(self): # returns the value of the 100-sided die
         result = self.value + 1
-        self.value = result % 100
+        self.value = result % self.faces
         self.rollCount += 1
         return result
 
-    def Roll(self, count): # returns the value of the 100-sided die
+    def Roll(self, count = 3): # returns the value of the 100-sided die
         result = 0
         for ii in range(count):
             result += self.RollOnce()
         return result
 
-class Board:
-    def __init__(self):
-        self.players = []
-        self.die = Die()        
+class Game:
+    def __init__(self, max_score, players, die = Die()):
+        self.max_score = max_score
+        self.players = players.copy()
+        self.die = die
         self.PrintBoard()
-
-    def AddPlayer(self, player):
-        self.players.append(player)
 
     def PlayGame(self):
         gameOver = False
@@ -73,10 +66,11 @@ class Board:
 
     def TakeTurn(self):
         for p in self.players:
-            move = self.die.Roll(3)
+            move = self.die.Roll()
             p.Move(move)
-            if p.score >= 1000:
-                self.part1 = [x.score for x in self.players if x.score < 1000][0] * self.die.rollCount
+            if p.score >= self.max_score:
+                losers = [x.score for x in self.players if x.score < self.max_score]
+                self.part1 = losers[0] * self.die.rollCount if (len(losers) > 0) else 0
                 return True
         self.PrintBoard()
         return False
