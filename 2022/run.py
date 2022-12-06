@@ -30,7 +30,7 @@ class Puzzle:
         dayex = re.compile("day(\d+)")
 
         for path in paths:
-            print("Found " + path)
+            #print("Found " + path)
             match = dayex.match(path)
             if match is not None:
                 index = int(match.group(1))
