@@ -6,7 +6,7 @@ class PuzzleBase:
     def __init__(self, day, description, data_path):
         self.data_path = data_path
         self.answers = [None, None]
-        self.test_answers = [None, None]
+        self.test_answers = [95437, None]
 
         parser = argparse.ArgumentParser()
         parser.add_argument("--debug", help="Debug mode, forces use of windows", action="store_true")

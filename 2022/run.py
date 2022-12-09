@@ -6,6 +6,9 @@ import re
 
 def main():
     puzzles = Puzzle.FindPuzzles()
+
+    print("\n\n***** https://adventofcode.com/2022 *****")
+    print("*****************************************")
     for p in puzzles:
         p.Run()
 
