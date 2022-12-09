@@ -13,7 +13,7 @@ class Puzzle(utils.PuzzleBase):
         for ii in range(0, len(line)-count):
             marker = set(line[ii:ii+count])
             if len(marker) == count:
-                print(f"marker={marker}, ii={ii+count}")
+                #print(f"marker={marker}, ii={ii+count}")
                 return ii+count
 
     def run_part1(self):

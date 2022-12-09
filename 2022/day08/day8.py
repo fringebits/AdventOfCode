@@ -56,7 +56,7 @@ class TreeMap(utils.HeightMap):
 
 class Puzzle(utils.PuzzleBase):
     def __init__(self):
-        super().__init__(8, "Tuning Trouble", os.path.dirname(__file__))
+        super().__init__(8, "Treetop Tree House", os.path.dirname(__file__))
         self.test_answers = [21, 8]
         self.answers = [1647, 392080]
 
