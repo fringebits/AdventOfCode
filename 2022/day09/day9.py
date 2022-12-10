@@ -73,7 +73,7 @@ class Puzzle(utils.PuzzleBase):
     def __init__(self):
         self.moves = []
         super().__init__(9, "Rope Bridge", os.path.dirname(__file__))
-        self.test_answers = [13, None]
+        self.test_answers = [88, 36]
         self.answers = [6464, 2604]
 
     def parse_input(self):        

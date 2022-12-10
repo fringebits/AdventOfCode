@@ -8,6 +8,7 @@ class Puzzle(utils.PuzzleBase):
     def __init__(self):
         super().__init__(6, "Tuning Trouble", os.path.dirname(__file__))
         self.answers = [1140, None]
+        self.test_answers = [5, 23]
 
     def test_marker(line, count):
         for ii in range(0, len(line)-count):

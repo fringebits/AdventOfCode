@@ -7,6 +7,8 @@ import utils
 class Puzzle(utils.PuzzleBase):
     def __init__(self):
         super().__init__(4, "Camp Cleanup", os.path.dirname(__file__))
+        self.test_answers = [2, 4]
+        self.answers = [453, 919]
 
     def parse_input(self):
         self.ranges = []
