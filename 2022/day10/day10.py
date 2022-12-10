@@ -8,6 +8,14 @@ import re
 
 ## https://adventofcode.com/2022/day/10
 
+## Test Solution: (part2)
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....
+
 class Instruction:
     def __init__(self, input:str):
         # there are only two instructions, default is noop
@@ -45,7 +53,8 @@ class Puzzle(utils.PuzzleBase):
         self.instructions = []
         super().__init__(10, "Cathode-Ray Tube", os.path.dirname(__file__))
         self.test_answers = [13140, None]
-        self.answers = [11220, None]
+        self.answers = [11220, '\n###..####.###...##....##.####.#....#..#.\n' + '#..#....#.#..#.#..#....#.#....#....#.#..\n' + '###....#..#..#.#..#....#.###..#....##...\n' +  '#..#..#...###..####....#.#....#....#.#..\n' + '#..#.#....#....#..#.#..#.#....#....#.#..\n' + '###..####.#....#..#..##..####.####.#..#.\n']
+        # letters should be:  BZPAJELK
         
     def parse_input(self): 
         self.instructions = [Instruction(x) for x in self.input]
@@ -71,7 +80,7 @@ class Puzzle(utils.PuzzleBase):
         crt = CRT(40, 6)
         for ii in self.instructions:
             crt.execute(ii)
-        print(f'{crt}')
+        return '\n'+crt.__str__()
 
 @utils.timer
 def run():
