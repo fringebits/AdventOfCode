@@ -1,3 +1,5 @@
+from .vec2 import Vec2
+
 class Grid:
     def __init__(self, width, height, fill = None):
         self.width = width
@@ -28,12 +30,15 @@ class Grid:
         return result
 
     def IndexToPos(self, index):
-        return utils.Vec2(index % self.width, int(index / self.width))
+        return Vec2(index % self.width, int(index / self.width))
     
     def PosToIndex(self, pos):
         return pos.X + pos.Y * self.width
 
-    def GetValueAt(self, pos):
+    def SetValueAt(self, pos:Vec2, value):
+        self.set(pos.Y, pos.X, value)
+
+    def GetValueAt(self, pos:Vec2):
         if not self.contains(pos):
             return None
         index = self.PosToIndex(pos)
@@ -42,7 +47,8 @@ class Grid:
     def __str__(self) -> str:
         result = ''
         for rr in range(0,self.height):
-            result = result + self.get_row(rr).__str__() + '\n'
+            row = ''.join([x.__str__() for x in self.get_row(rr)])
+            result = result + row + '\n'
         return result
 
 class HeightMap(Grid):
