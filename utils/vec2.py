@@ -6,10 +6,10 @@ class Vec2:
         self.Y = y
 
     def __str__(self):
-        return "({0},{1})".format(self.X, self.Y)
+        return f'({self.X}, {self.Y})'
 
     def __repr__(self) -> str:
-        return f"X={self.X}, Y={self.Y}"
+        return f'({self.X}, {self.Y})'
 
     def __add__(self, other):
         x = self.X + other.X

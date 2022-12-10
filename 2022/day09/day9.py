@@ -15,70 +15,66 @@ def sign(num):
         return -1
     return 0
 
-class Bridge(utils.Grid):
-    def __init__(self, width, height):
-        super().__init__(width, height, 0)
-        self.start = utils.Vec2(width >> 1, height >> 1)
-        self.head = self.start
-        self.tail = self.head
-        self.set(self.tail.Y, self.tail.X, 1) # mark starting tail position
+class Bridge():
+    def __init__(self, num_knots):
+        self.start = utils.Vec2(0, 0)
+        self.knots = [self.start for x in range(num_knots + 1)]
+        self.visited = { self.start }
 
     def move(self, step):
         # moves are *never* diagnol
         for ii in range(abs(step.X)):
-            self.move_one(utils.Vec2(sign(step.X), 0))
+            self.knots[0] += utils.Vec2(sign(step.X), 0)
+            self.resolve_knots()
 
         for ii in range(abs(step.Y)):
-            self.move_one(utils.Vec2(0, sign(step.Y)))
-        #self.print_board()
+            self.knots[0] += utils.Vec2(0, sign(step.Y))
+            self.resolve_knots()
 
-    def move_one(self, step, R=1):
-        self.head += step
-        assert self.contains(self.head), f'HEAD {self.head} is off the grid'
+    def resolve_knots(self):
+        for kk in range(1,len(self.knots)):
+            self.knots[kk] = self.resolve_knot(self.knots[kk-1], self.knots[kk])
+            if kk == len(self.knots)-1:
+                self.visited.add(self.knots[kk])
 
-        delta = self.tail - self.head
+    def resolve_knot(self, head, knot):
+        delta = knot - head
 
-        if abs(delta.X) <= R and abs(delta.Y) <= R:
-            return
+        if abs(delta.X) <= 1 and abs(delta.Y) <= 1:
+            return knot
 
         if delta.Y == 0:
-            self.tail += utils.Vec2(-sign(delta.X) * (abs(delta.X) - R), 0)
+            knot += utils.Vec2(-sign(delta.X) * (abs(delta.X) - 1), 0)
         elif delta.X == 0:
-            self.tail += utils.Vec2(0, -sign(delta.Y) * (abs(delta.Y) - R))
+            knot += utils.Vec2(0, -sign(delta.Y) * (abs(delta.Y) - 1))
         else:
-            self.tail += utils.Vec2(-sign(delta.X), -sign(delta.Y))
+            knot += utils.Vec2(-sign(delta.X), -sign(delta.Y))
 
-        assert self.contains(self.tail), f'TAIL {self.tail} is off the grid'
-        self.set(self.tail.Y, self.tail.X, 1)
+        return knot
  
-    def is_valid(self):
-        delta = self.tail - self.head
-        return abs(delta.X) > 1 or abs(delta.Y) > 1
-
-    def print_board(self):
-        for rr in range(self.height-1, -1, -1):
-            line = ''
-            for cc in range(self.width):
-                pos = utils.Vec2(cc, rr)
-                if pos == self.head:
-                    pix = 'H'
-                elif pos == self.tail:
-                    pix = 'T'
-                elif pos == self.start:
-                    pix = 's'
-                else:
-                    pix = self.GetValueAt(pos).__str__()
-                line += pix
-            print(line)
-        print('\n====\n')
+    # def print_board(self):
+    #     for rr in range(self.height-1, -1, -1):
+    #         line = ''
+    #         for cc in range(self.width):
+    #             pos = utils.Vec2(cc, rr)
+    #             if pos == self.head:
+    #                 pix = 'H'
+    #             elif pos == self.tail:
+    #                 pix = 'T'
+    #             elif pos == self.start:
+    #                 pix = 's'
+    #             else:
+    #                 pix = self.GetValueAt(pos).__str__()
+    #             line += pix
+    #         print(line)
+    #     print('\n====\n')
 
 class Puzzle(utils.PuzzleBase):
     def __init__(self):
         self.moves = []
         super().__init__(9, "Rope Bridge", os.path.dirname(__file__))
         self.test_answers = [13, None]
-        # self.answers = [1647, 392080]
-        self.Bridge = Bridge(1024, 1024)
+        self.answers = [6464, 2604]
 
     def parse_input(self):        
         for line in self.input:
@@ -99,13 +95,18 @@ class Puzzle(utils.PuzzleBase):
             self.moves.append(move)
 
     def run_part1(self):
-        #self.Bridge.reset()
+        bridge = Bridge(1) # 1 knot
         for move in self.moves:
-            self.Bridge.move(move)
-        score = sum([x for x in self.Bridge.data if isinstance(x, int)])
+            bridge.move(move)
+        score = len(bridge.visited)
         return score
 
-
+    def run_part2(self):
+        bridge = Bridge(9) # 9 knots
+        for move in self.moves:
+            bridge.move(move)
+        score = len(bridge.visited)
+        return score
 
 @utils.timer
 def run():
